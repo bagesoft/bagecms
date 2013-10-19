@@ -29,7 +29,7 @@
   <div class="wrap clear">
     <div class="act">
       <p> <a href="http://www.bagecms.com" target="_blank">QQ群：139869141</a><span class="split">|</span> <a href="http://www.bagecms.com" target="_blank">BageCMS</a><span class="split">|</span><a href="http://www.bagesoft.cn" target="_blank">BageSoft</a><span class="split">|</span> ( <a href="http://www.miitbeian.gov.cn/" target="_blank"><?php echo $this->_conf['site_icp']?></a> )&nbsp;&nbsp;</p>
-      <p><?php echo $this->_conf['site_copyright']?> All Rights Reserved  BageCMS. 版权所有 <a href="http://www.bagecms.com">基于BageCMS构建</a></p>
+      <p><?php echo $this->_conf['site_copyright']?> All Rights Reserved  BageCMS. 版权所有 <a href="http://www.bagecms.com">基于BageCMS构建</a><?php echo $this->_conf['site_stats']?></p>
     </div>
   </div>
 </div>

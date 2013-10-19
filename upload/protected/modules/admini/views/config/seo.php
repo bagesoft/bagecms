@@ -26,7 +26,7 @@
       <td class="tb_title">网站描述：</td>
     </tr>
     <tr >
-      <td ><textarea  rows="6" onDblClick="textareasize(this, 1)" onKeyUp="textareasize(this, 0)" name="Config[seo_description]" id="seo_description" cols="50" class="tarea middenWidth"><?php echo $config['seo_description']?></textarea>
+      <td ><textarea  rows="6" name="Config[seo_description]" id="seo_description" cols="50" class="tarea middenWidth"><?php echo $config['seo_description']?></textarea>
         </span></td>
     </tr>
     <tr class="submit">

@@ -1,8 +1,10 @@
-1.�ϴ� upload Ŀ¼�������ļ���������
-2.������������� �����ַ /index.php?r=install
-3.ϵͳ���� BageCMS ���������������������ʾ�������������
-4.�������ݿ⼰�����Ϣ����װϵͳ
-5.��װ��ɣ���̨��¼��ַ �����ַ /index.php?r=admini
+1.上传 upload 目录中所有文件至服务器
+2.打开浏览器，输入 http://你的网址/index.php?r=install
+3.系统会检测 BageCMS 依赖环境及组件，根据提示解决不满足的组件
+4.输入数据库及相关信息，安装系统
+5.安装完成，后台登录地址 http://你的网址/index.php?r=admini
 
-��ʾ�����ѡ���˰�װ�������ݣ��뽫 _tmp/201309.tar.gz �ļ���ѹ�����ϴ�Ŀ¼ 201309 ���ļ��� uploads/�£���������õ���ͼƬ������������ʾ
+提示：如果选择了安装测试数据，请将 _tmp/201309.tar.gz 文件解压，请上传目录 201309 及文件至 uploads/下，否则测试用到的图片将不能正常显示
 
+
+如有任何问题，请在八哥软件官方网站"有问必答}中提交： http://www.bagesoft.cn/ask

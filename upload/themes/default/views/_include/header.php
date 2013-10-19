@@ -28,7 +28,7 @@
           <?php foreach((array)$this->_catalog as $key=>$row):?>
           <?php if($row['parent_id'] == 0):?>
           <dd>
-            <h3><a href="<?php echo $this->createUrl('post/index',array('catalog'=>$row['catalog_name_alias'])) ?>"><?php echo $row['catalog_name']?><i></i></a></h3>
+            <h3><a href="<?php echo $this->createUrl('post/index',array('catalog'=>$row['catalog_name_alias'])) ?>"><?php echo $row['catalog_name']?></a></h3>
             <ul>
               <?php foreach((array)Catalog::lite($row['id']) as $key=>$val):?>
               <li><a href="<?php echo $this->_navLink($val)?>"><?php echo $val['catalog_name']?></a></li>

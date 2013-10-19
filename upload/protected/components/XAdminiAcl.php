@@ -114,9 +114,8 @@ class XAdminiAcl
                 }else{
                     self::$aclList[$k]['url'] = self::_parentRouter($k, $aclArr);
                     foreach($r['action'] as $kk=>$rr){
-                        if(!in_array($rr['acl'], explode(',', $acl))){
+                        if(!in_array($rr['acl'], explode(',', $acl)))
                             unset(self::$aclList[$k]['action'][$kk]);
-                        }
                     }
                 }
             }
@@ -134,9 +133,8 @@ class XAdminiAcl
         $one = 0;
         foreach((array)self::$aclList[$n]['action'] as $key=>$row){
             if(in_array($row['acl'], $acl)){
-                if($one == 0){
+                if($one == 0)
                     return $row['url'];
-                }
             }
         }
         return 'home';

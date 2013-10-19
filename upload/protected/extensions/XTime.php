@@ -1,6 +1,6 @@
 <?php
 /**
- * 友好显示日期
+ * 日期操作类
  * 
  * @author        shuguang <5565907@qq.com>
  * @copyright     Copyright (c) 2007-2013 bagesoft. All rights reserved.
@@ -24,13 +24,6 @@ class XTime {
 	}
 	
 	/**
-	* Returns a formatted descriptive date string for given datetime string.
-	*
-	* If the given date is today, the returned string could be "Today, 6:54 pm".
-	* If the given date was yesterday, the returned string could be "Yesterday, 6:54 pm".
-	* If $dateString's year is the current year, the returned string does not
-	* include mention of the year.
-	*
 	* @param string $dateString Datetime string or Unix timestamp
 	* @return string Described, relative date string
 	*/
@@ -101,23 +94,7 @@ class XTime {
 	}
 	
 	/**
-	* Returns either a relative date or a formatted date depending
-	* on the difference between the current time and given datetime.
-	* $datetime should be in a <i>strtotime</i>-parsable format, like MySQL's datetime datatype.
-	*
-	* Options:
-	*  'format' => a fall back format if the relative time is longer than the duration specified by end
-	*  'end' =>  The end of relative time telling
-	*
-	* Relative dates look something like this:
-	*	3 weeks, 4 days ago
-	*	15 seconds ago
-	* Formatted dates look like this:
-	*	on 02/18/2004
-	*
-	* The returned string includes 'ago' or 'on' and assumes you'll properly add a word
-	* like 'Posted ' before the function output.
-	*
+
 	* @param string $dateString Datetime string
 	* @param array $options Default format if timestamp is used in $dateString
 	* @return string Relative time string.

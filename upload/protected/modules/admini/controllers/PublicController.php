@@ -43,6 +43,7 @@ class PublicController extends Controller
                     $data->login_count = $data->login_count+1;
                     $data->save();
                     parent::_adminiLogger(array ('catalog' => 'login' , 'intro' => '用户登录成功:'.$model->username ));
+                    $this->redirect(array('default/index'));
                     XUtils::message('success', '登录成功', $this->createUrl('default/index'),2 );
                 }
             }

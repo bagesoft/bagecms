@@ -10,7 +10,6 @@
  * @version       v3.1.0
  */
 
-
 class DatabaseController extends XAdminiBase
 {
 
@@ -44,6 +43,7 @@ class DatabaseController extends XAdminiBase
     public function actionQuery ()
     {
         parent::_acl();
+        parent::_configParams(array('action'=>'allowExecuteSql', 'val'=>'Y', 'message'=>'不允许执行SQL，请在 protected/config/params.php 中配置 allowExecuteSql 为 Y'));
         $this->render('query', array ());
     
     }
@@ -53,7 +53,7 @@ class DatabaseController extends XAdminiBase
      */
     public function actionDoQuery ()
     {
-        parent::_acl('database_query', array('ajax'=>true));
+        parent::_acl('database_query', array('response'=>'text'));
         if (XUtils::method() == 'POST') {
             $command = $this->_gets->getParam('command');
             $table = $this->_gets->getParam('table');
@@ -89,9 +89,9 @@ class DatabaseController extends XAdminiBase
      */
     public function actionExecute ()
     {
-        
         if (XUtils::method() == 'POST') {
-            parent::_acl('database_query', array('ajax'=>true));
+            parent::_acl('database_query', array('response'=>'text'));
+            parent::_configParams(array('action'=>'allowExecuteSql', 'val'=>'Y', 'message'=>'不允许执行SQL，请在 protected/config/params.php 中配置 allowExecuteSql 为 Y', 'response'=>'text'));
             $sql = $this->_gets->getParam('command');
             $sqls = self::_sqlSplit($sql);
             foreach ($sqls as $execute)
@@ -219,7 +219,7 @@ class DatabaseController extends XAdminiBase
         }
         
         if (trim($tabledump)) {
-            $tabledump = "# data bakfile\n# version:V1\n# time:" . date('Y-m-d H:i:s') . "\n# type:cms\n# www.bagecms.com\n# --------------------------------------------------------\n\n\n" . $tabledump;
+            $tabledump = "# bagecms database backup\n# version:".$this->_bagecms."\n# time:" . date('Y-m-d H:i:s') . "\n# type:cms\n# www.bagecms.com\n# --------------------------------------------------------\n\n\n" . $tabledump;
             $tableid = $i;
             $filename = $tabletype . '_' . date('Ymd') . '_' . $random . '_' . $fileid . '.sql';
             $altid = $fileid;

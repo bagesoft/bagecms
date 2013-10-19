@@ -29,8 +29,7 @@ $(document).ready(function(){
     <tr class="tb_header">
       <th width="5%">ID</th>
       <th>名称</th>
-      <th width="15%">开始时间</th>
-      <th width="15%">到期时间</th>
+      <th width="15%">起始时间</th>
       <th width="15%">录入时间</th>
       <th>操作</th>
     </tr>
@@ -41,9 +40,10 @@ $(document).ready(function(){
       <td ><?php echo $row->title?>
         <?php if($row->status_is == 'N'):?>
         <img src="<?php echo $this->_baseUrl?>/static/admin/images/error.png" align="absmiddle" />
-        <?php endif;?></td>
-      <td ><?php echo date('Y-m-d H:i',$row->start_time)?></td>
-      <td ><?php echo date('Y-m-d H:i',$row->expired_time)?></td>
+        <?php endif;?></p>
+      <?php echo $row->title_alias?></td>
+      <td ><?php echo date('Y-m-d H:i',$row->start_time)?></p><?php echo date('Y-m-d H:i',$row->expired_time)?></td>
+      
       <td ><?php echo date('Y-m-d H:i',$row->create_time)?></td>
       <td ><a href="<?php echo  $this->createUrl('adUpdate',array('id'=>$row->id))?>"><img src="<?php echo $this->_baseUrl?>/static/admin/images/update.png" align="absmiddle" /></a>&nbsp;&nbsp;<a href="<?php echo  $this->createUrl('batch',array('command'=>'adDelete', 'id'=>$row->id))?>" class="confirmSubmit"><img src="<?php echo $this->_baseUrl?>/static/admin/images/delete.png" align="absmiddle" /></a></td>
     </tr>

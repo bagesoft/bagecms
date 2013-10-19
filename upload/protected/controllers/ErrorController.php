@@ -20,11 +20,11 @@ class ErrorController extends Controller
     {
         if ($error = Yii::app()->errorHandler->error) {
             switch ($error['code']) {
-                case 404: $tpl = 'error404'; break; 
-                case 400: $tpl = 'error400'; break; 
+                case 404: $tpl = 'error404'; break;
                 case 500: $tpl = 'error500'; break; 
                 default: $tpl = 'error'; break;
             }
+            $error['redirect'] = Yii::app()->request->urlReferrer ? Yii::app()->request->urlReferrer: Yii::app()->homeUrl;
             if (Yii::app()->request->isAjaxRequest)
                 echo $error['message'];
             else

@@ -22,7 +22,7 @@ class AdminController extends XAdminiBase
         parent::_acl(); 
         $model = new Admin();
         $criteria = new CDbCriteria();
-        $criteria->condition = 't.status_is=1';
+        $criteria->condition = "t.status_is='Y'";
         $criteria->order = 't.id DESC';
         $criteria->with = 'adminGroup';
         $count = $model->count($criteria);
@@ -68,12 +68,10 @@ class AdminController extends XAdminiBase
         
         if (isset($_POST['Admin'])) {
             $password = $_POST['Admin']['password'];
-            
-            if (empty($password)) {
+            if (empty($password)) 
                 $_POST['Admin']['password'] = $model->password;
-            } else {
+            else 
                 $_POST['Admin']['password'] = md5($password);
-            }
             
             $model->attributes = $_POST['Admin'];
             
@@ -117,11 +115,10 @@ class AdminController extends XAdminiBase
         if (isset($_POST['AdminGroup'])) {
             $model->attributes = $_POST['AdminGroup'];
             $acl = Yii::app()->request->getPost('acl');
-            if (is_array($acl)) {
+            if (is_array($acl)) 
                 $model->acl = implode(',', array_unique($acl));
-            } else {
+             else 
                 $model->acl = 'administrator';
-            }
             if ($model->save()) {
                 parent::_adminiLogger(array ('catalog' => 'create' , 'intro' => '录入管理员组' . $model->group_name ));
                 $this->redirect(array ('group' ));
@@ -143,11 +140,10 @@ class AdminController extends XAdminiBase
         if (isset($_POST['AdminGroup'])) {
             $data->attributes = $_POST['AdminGroup'];
             $acl = Yii::app()->request->getParam('acl');
-            if (is_array($acl)) {
+            if (is_array($acl))
                 $data->acl = implode(',', array_unique($acl));
-            } else {
+            else 
                 $data->acl = 'administrator';
-            }
             if ($data->save()) {
                 parent::_adminiLogger(array ('catalog' => 'create' , 'intro' => '编辑管理员组' . $data->group_name ));
                 $this->redirect(array ('group' ));
@@ -166,11 +162,10 @@ class AdminController extends XAdminiBase
         
         if (isset($_POST['Admin'])) {
             $password = $_POST['Admin']['password'];
-            if (empty($password)) {
+            if (empty($password))
                 $_POST['Admin']['password'] = $model->password;
-            } else {
+             else 
                 $_POST['Admin']['password'] = md5($password);
-            }
             $model->attributes = $_POST['Admin'];
             $model->password = empty($password) ? $model->password : md5($password);
             if ($model->save()) {

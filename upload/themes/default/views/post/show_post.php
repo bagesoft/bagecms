@@ -89,7 +89,7 @@
         <h3>相关阅读</h3>
       </div>
       <div class="bmc">
-        <ul class="xl xl2 clear" id="raid_div">
+        <ul class="list clear" id="raid_div">
 		<?php foreach((array)Bagecms::getList('post','index_news',array('where'=>"status_is='Y' AND catalog_id={$bagecmsShow['catalog_id']} AND id!={$bagecmsShow['id']}",'order'=>'id DESC', 'limit'=>8)) as $newsKey=>$newsRow):?>
           <li>• <a href="<?php echo $this->createUrl('post/show',array('id'=>$newsRow['id']))?>" target="_blank"><?php echo $newsRow['title']?></a></li>
 		<?php endforeach?> 

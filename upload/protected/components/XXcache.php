@@ -19,11 +19,10 @@ class XXcache {
      */
     public static function get( $id ) {
         $value = Yii::app()->cache->get( $id );
-        if ( $value === false ) {
+        if ( $value === false ) 
             return '';
-        } else {
+         else 
             return $value;
-        }
     }
 
     /**
@@ -43,11 +42,10 @@ class XXcache {
      */
     public static function system( $id, $expirse = 600, $fields = '', $params = array() ) {
         $value = Yii::app()->cache->get( $id );
-        if ( $value === false ) {
+        if ( $value === false ) 
             return self::_refresh( $id, $expirse, $fields, $params );
-        } else {
+        else 
             return $value;
-        }
     }
 
     /**
@@ -117,9 +115,8 @@ class XXcache {
         $model = new $mod();
         $dataGet = $model->findAll( $condition );
         foreach ( (array) $dataGet as $key => $row ) {
-            foreach ( (array) self::_attributes( $fields, $model ) as $attr ) {
+            foreach ( (array) self::_attributes( $fields, $model ) as $attr ) 
                 $returnData[$key][$attr] = $row->$attr;
-            }
         }
         return $returnData;
     }
@@ -132,9 +129,8 @@ class XXcache {
      */
     protected function _attr2val( $data, $model, $fields = '' ) {
         foreach ( (array) $data as $key => $row ) {
-            foreach ( (array) self::_attributes( $fields, $model ) as $attr ) {
+            foreach ( (array) self::_attributes( $fields, $model ) as $attr )
                 $returnData[$key][$attr] = $row->$attr;
-            }
         }
         return $returnData;
     }
@@ -150,9 +146,8 @@ class XXcache {
         $configModel = Config::model()->findAll();
         foreach ( (array) $configModel as $key => $row ) {
             if ( $params['scope'] ) {
-                if ( in_array( $row['scope'], $params['scope'] ) ) {
+                if ( in_array( $row['scope'], $params['scope'] ) )
                     $returnData[$row['variable']] = $row['value'];
-                }
             }else {
                 $returnData[$row['variable']] = $row['value'];
             }

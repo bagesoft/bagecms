@@ -29,6 +29,7 @@ class PostComment extends XBaseModel
 			array('content', 'required'),
 			array('post_id, user_id, create_time', 'length', 'max'=>10),
 			array('nickname', 'length', 'max'=>60),
+			array('email', 'email'),
 			array('email', 'length', 'max'=>50),
 			array('status_is, status_answer', 'length', 'max'=>1),
 			array('client_ip', 'length', 'max'=>5),

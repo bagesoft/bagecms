@@ -20,14 +20,12 @@ class XAdminiBase extends Controller
     public function init ()
     {
         parent::init();
-
         if (isset($_POST['sessionId'])) {
             $session = Yii::app()->getSession();
             $session->close();
             $session->sessionID = $_POST['sessionId'];
             $session->open();
         }
-        
         $this->_adminiUserId = parent::_sessionGet('_adminiUserId');
         $this->_adminiUserName = parent::_sessionGet('_adminiUserName');
         $this->_adminiGroupId = parent::_sessionGet('_adminiGroupId');
@@ -35,12 +33,28 @@ class XAdminiBase extends Controller
         
         if (empty($this->_adminiUserId))
             $this->redirect(array ('public/login' ));
-       
         //栏目
         $this->_catalog = Catalog::model()->findAll('status_is=:status',array('status'=>'Y'));
         //系统配置
         $this->_conf = self::_config();
-        
+    }
+
+    /**
+     * 配置文件中参数检测
+     */
+    protected function _configParams($params){
+        if(Yii::app()->params[$params['action']] != $params['val'] && $params['response'] =='json'){
+            exit(CJSON::encode(array('state'=>'error', 'message'=>$params['message'])));
+        }elseif(Yii::app()->params[$params['action']] != $params['val']&& $params['response'] =='text'){
+            exit($params['message']);
+        }elseif(Yii::app()->params[$params['action']] != $params['val']){
+            $tplVar = array(
+                'code'=>'访问受限',
+                'message'=>$params['message'],
+                'redirect'=>$params['redirect'] ? $params['redirect'] : Yii::app()->request->urlReferrer ,
+            );
+            exit($this->render('/_include/_error', $tplVar));
+        }
     }
 
     /**
@@ -49,9 +63,8 @@ class XAdminiBase extends Controller
      */
     private function _config(){
         $model = Config::model()->findAll();
-        foreach ($model as $key => $row) {
+        foreach ($model as $key => $row) 
             $config[$row['variable']] = $row['value'];
-        }
         return $config;
     }
 
@@ -62,7 +75,7 @@ class XAdminiBase extends Controller
     public function actionKeyword()
     {
         $string = trim($this->_gets->getParam('string'));
-        $return  = XSplitKeyword::discuz($string);
+        $return  = XAutoKeyword::discuz($string);
         if($return  == 'empty'){
             $data['state'] = 'error';
             $data['message'] = '未成功获取';
@@ -255,20 +268,31 @@ class XAdminiBase extends Controller
      * @param $action
      */
     
-    protected function _acl ($action = false, $params = array('ajax'=>false, 'append'=>',default_index,default_home'))
+    protected function _acl ($action = false, $params = array('response'=>false, 'append'=>',default_index,default_home'))
     {
         $actionFormat = empty($action) ? strtolower($this->id . '_' . $this->action->id) : strtolower($action);
         $permission = self::_sessionGet('_adminiPermission');
         if ($permission != 'administrator') {
             $adminiGroup = self::_sessionGet('_adminiGroupId');
-            $aclDb = AdminGroup::model()->find('id=:id', array ('id' => $adminiGroup ));
-            if (! in_array($actionFormat, explode(',', strtolower($aclDb->acl) . $params['append']))) {
-                if($params['ajax'] == false){
-                    XUtils::message('error', '当前角色组无权限进行此操作，请联系管理员授权', $this->createUrl('index'), 20);
-                }else{
+            $aclDb = AdminGroup::model()->findByPk($adminiGroup);
+            try {
+                if (! in_array($actionFormat, explode(',', strtolower($aclDb->acl) . $params['append']))) 
+                    throw new Exception('当前角色组无权限进行此操作，请联系管理员授权');
+            } catch (Exception $e) {
+                if($params['response'] == 'text'){
+                    exit($e->getMessage()); 
+                }elseif($params['response'] == 'json'){
                     $var['state'] = 'error';
-                    $var['message'] = '当前角色组无权限进行此操作，请联系管理员授权';
-                    exit(CJSON::encode($var));
+                    $var['message'] = $e->getMessage();
+                    exit(CJSON::encode($var)); 
+                }else{
+                    $referrer = Yii::app()->request->urlReferrer? Yii::app()->request->urlReferrer : $this->createUrl('default/home') ;
+                    $tplVar = array(
+                        'code'=>'访问受限',
+                        'message'=>$e->getMessage(),
+                        'redirect'=>$params['redirect'] ? $params['redirect'] : $referrer ,
+                    );
+                    exit($this->render('/_include/_error', $tplVar));
                 }
             }
         }

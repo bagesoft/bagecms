@@ -21,16 +21,12 @@ class Bagecms {
      */
     public static function getItem( $model, $id = '', $params = array() ) {
         if ( isset( $params['cache'] ) ) {
-
             $value = Yii::app()->cache->get( $id );
-            if ( $value === false ) {
-
+            if ( $value === false ) 
                 return self::_getItem( $model, $id, $params );
-            } else {
+            else 
                 return $value;
-            }
         } else {
-
             return self::_getItem( $model, $id, $params );
         }
     }
@@ -44,14 +40,11 @@ class Bagecms {
      */
     public static function getList( $model, $id = '', $params = array() ) {
         if ( isset( $params['cache'] ) ) {
-
             $value = Yii::app()->cache->get( $id );
-            if ( $value === false ) {
-
+            if ( $value === false ) 
                 return self::_getList( $model, $id, $params );
-            } else {
+             else 
                 return $value;
-            }
         } else {
             return self::_getList( $model, $id, $params );
         }
@@ -79,15 +72,15 @@ class Bagecms {
             $params['alias'] && $array['alias'] = $params['alias'];
             $params['params'] && $array['params'] = $params['params'];
             $params['joinType'] && $array['joinType'] = $params['joinType'];
-            if ( $params['xsql'] ) {
+           if ( $params['xsql'] ) {
                 $dataGet = Yii::app()->db->createCommand( $params['xsql'] )->queryRow();
-            } else {
+           } else {
                 $dataGet = $xmodel->find( $array );
-            }
+	   }
             if ( $dataGet ) {
-                foreach ( (array) self::_attributes( $params['select'], $xmodel ) as $attr ) {
+                foreach ( (array) self::_attributes( $params['select'], $xmodel ) as $attr ){
                     $returnData[$attr] = $dataGet->$attr;
-                }
+               }
                 if ( $params['cache'] ) {
                     $cacheTime = empty( $params['cacheTime'] ) ? 3600 : $params['cacheTime'];
                     Yii::app()->cache->set( $id, $returnData, $cacheTime );
@@ -109,7 +102,6 @@ class Bagecms {
      */
     protected function _getList( $model = '', $id, $params = '' ) {
         $model = ucfirst( $model );
-
         $bagecmsModel = new $model();
         $params['limit'] && $array['limit'] = $params['limit'];
         $params['where'] && $array['condition'] = $params['where'];
@@ -121,7 +113,6 @@ class Bagecms {
         $params['params'] && $array['params'] = $params['params'];
         $params['joinType'] && $array['joinType'] = $params['joinType'];
         $params['group'] && $array['group'] = $params['group'];
-
         try {
             if ( $params['xsql'] ) {
                 $dataGet = Yii::app()->db->createCommand( $params['xsql'] )->queryAll();

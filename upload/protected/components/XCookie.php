@@ -28,7 +28,6 @@ class XCookie
         $domain && $cookieSet->domain = $domain;
         $secure && $cookieSet->secure = $secure;
         Yii::app()->request->cookies[$name] = $cookieSet;
-    
     }
 
     /**

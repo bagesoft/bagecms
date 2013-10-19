@@ -10,7 +10,6 @@
  * @version       v1.0.0
  */
 
-
 class DataList extends CWidget
 {
     public $model;

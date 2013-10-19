@@ -16,7 +16,7 @@ class SearchController extends XFrontBase
      * 首页
      */
     public function actionIndex() {
-        $keyword = trim($this->_gets->getParam('keyword'));
+        $keyword = CHtml::encode(strip_tags(trim($this->_gets->getParam('keyword'))));
         $postModel = new Post();
         $postCriteria = new CDbCriteria();
         if($keyword)
@@ -28,7 +28,7 @@ class SearchController extends XFrontBase
         $bagecmsQuestionCount = $postModel->count( $postCriteria );
         $postPages = new CPagination( $bagecmsQuestionCount );
         $postPages->pageSize = 15;
-        $postPageParams = XUtils::buildCondition( $_GET, array ( 'id'    ) );
+        $postPageParams = XUtils::buildCondition( $_GET, array ( 'keyword'    ) );
         $postPageParams['#'] = 'list';
         $postPages->params = is_array( $postPageParams ) ? $postPageParams : array ();
         $postCriteria->limit = $postPages->pageSize;

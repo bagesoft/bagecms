@@ -32,7 +32,7 @@ $(function(){
     <td ><?php echo $form->textField($model,'tips',array('size'=>40,'maxlength'=>128)); ?></td>
   </tr>
   <tr >
-    <td class="tb_title">适用范围：<?php echo $form->dropDownList($model,'scope',array( 'post'=>'内容','config'=>'系统配置', 'page'=>'单页'),array('onchange'=>'changeScope(this)')); ?><span id="catalogSpan" <?php if($model->scope != 'post'):?>style="display:none"<?php endif?>> 栏目归属：
+    <td class="tb_title">适用范围：<?php echo $form->dropDownList($model,'scope',XParams::$attrScope,array('onchange'=>'changeScope(this)')); ?><span id="catalogSpan" <?php if($model->scope != 'post'):?>style="display:none"<?php endif?>> 栏目归属：
       <select name="Attr[catalog_id]" >
         <option value="0">==选择栏目==</option>
         <?php foreach((array)Catalog::get(0, $this->_catalog) as $catalog):?>
@@ -45,7 +45,7 @@ $(function(){
     <td class="tb_title">属性类型</td>
   </tr>
   <tr >
-    <td ><?php echo $form->dropDownList($model,'attr_type',array( 'input'=>'文本输入','select'=>'下拉选择','checkbox'=>'多选', 'textarea'=>'大段内容', 'radio'=>'单选' )); ?></td>
+    <td ><?php echo $form->dropDownList($model,'attr_type', XParams::$attrItemType); ?></td>
   </tr>
   <tr>
     <td class="tb_title">字段提示信息</td>
@@ -69,7 +69,6 @@ $(function(){
 });
 
 function changeScope(ths){
-	
 	if(ths.value == 'post'){
 		$("#catalogSpan").show();
 	}else{

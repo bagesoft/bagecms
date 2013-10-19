@@ -26,6 +26,9 @@ class XFrontBase extends Controller
     public function init ()
     {
         parent::init();
+        //检测系统是否已经安装
+        if(!is_file(WWWPATH.DS.'data'.DS.'install.lock'))
+            $this->redirect(array('/install'));
         //系统配置
         $this->_conf = XXcache::system('_config');
         $this->_catalog = Catalog::get(0, XXcache::system('_catalog'));
@@ -40,12 +43,10 @@ class XFrontBase extends Controller
      * 生成导航链接
      */
     protected function _navLink($catalog){
-
         if($catalog['redirect_url'])
             return $catalog['redirect_url'];
         else
             return $this->createUrl('post/index',array('catalog'=>$catalog['catalog_name_alias']));
-
     }
 
     /**

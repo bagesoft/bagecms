@@ -11,7 +11,7 @@
 * { word-wrap: break-word; outline: none; }
 html { margin: 0; width: 100%; height: 100%; }
 body { background: #FFF; text-align: center; overflow: auto; margin: 0 15px; }
-body, td, input, textarea, select, button { color: #555; font: 12px Verdana, Lucida, Helvetica, Arial, "微软雅黑", sans-serif; }
+body, td, input, textarea, select, button { color: #555; font: 12px Verdana, Lucida, Helvetica, Arial, "Microsoft Yahei", sans-serif; }
 ul, dl, dd, p, h1, h2, h3, h4, h5, h6, form, fieldset { margin: 0; padding: 0; }
 ul { list-style: none; }
 h1, h2, h3, h4, h5, h6 { font-size: 12px; }
@@ -23,6 +23,9 @@ table { border-collapse: collapse; }
 td, th { height: 25px; text-align: left; }
 label { cursor: pointer; }
 iframe { margin: 0; width: 100%; }
+.clear { zoom: 1; }
+.clear:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.searchArea{padding: 1px;height:40px;}
 
 /*定义新型浏览器特性*/
 ::-webkit-scrollbar{width:10px;height:10px}
@@ -35,7 +38,6 @@ iframe { margin: 0; width: 100%; }
 ::-webkit-scrollbar-resizer:vertical{background-color:#FF6E00}
 /*note form */
 textarea, input[type="text"], input[type='password'], select { padding: 5px 2px; border: 1px solid; border-color: #666 #ccc #ccc #666; background: #F9F9F9; color: #333;  font-size: 14px}
-
 .txt { width: 300px }
 .tarea { height: 100px; width: 400px }
 table { display: table; border-spacing: 2px; border-color: gray; width: 100% }
@@ -51,38 +53,26 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus { border-
 .right { float: right }
 .left { float: left }
 .container { padding: 9px 0 20px; text-align: left; }
-
 #contentHeader h3{padding:0 0 10px; font-size:14px}
-
 .tbTitle{background: #eef3f7; font-size:14px; font-weight:bold}
-
 .action{padding:5px 0}
 .action li{float:left; margin-right:5px}
-
 .action li a{ background: #51B148; color: #FFF; font: bold 14px arial, sans-serif; padding: 0.15em 1em; text-transform: uppercase;   margin: 0; overflow: visible; width: auto; *width: 1;
-
 cursor: pointer; padding:7px 20px; display:block }
 .action li a:hover{ background: #00A3CF;}
 .action li a.current{background: #00A3CF;}
 .actionLink{ background: #51B148; color: #FFF; font: bold 14px arial, sans-serif; padding: 0.15em 1em; text-transform: uppercase;   margin: 0; overflow: visible; width: auto; *width: 1;
 cursor: pointer; padding:5px 10px; display:inline-block }
 .actionLink:hover{ background: #00A3CF;}
-
-
 /*------------*/
 .form_table td { border-bottom: #eee 1px solid; height: 30px; line-height: 25px; padding-left: 5px; }
 .form_table td.tb_title { font-weight: bold }
-
 .search .txt { width: 100px }
-
 .button { -webkit-border-radius: 3px; border-radius: 3px; border: 1px solid #3079ED; background: #4D90FE; color: #FFF; font: bold 12px arial, sans-serif; padding: 0.15em 1em; text-transform: uppercase; height: 27px; line-height: 19px; margin: 0; overflow: visible; width: auto; *width: 1;
 cursor: pointer }
-
 .btnBlue{ border: border: 1px solid #3079ED; background: #DFEFFF; color: #FFF; }
 .button .btnDefault{ border: border: 1px solid #3079ED; background: #4D90FE; color: #FFF; }
-
 .operate, .submit { height: 45px }
-
 #fileListWarp li{float:left; padding:3px 5px;}
 /* 错误提示*/
 .erro_div { padding: 5px; background: #FFFF80; border: 1px solid #C4C43C; }
@@ -122,3 +112,12 @@ body[dir='rtl'] .formError .formErrorArrow, body.rtl .formError .formErrorArrow 
 .formError .formErrorArrow .line3 { width: 1px; border-left: 2px solid #ddd; border-right: 2px solid #ddd; border-bottom: 0 solid #ddd; }
 .formError .formErrorArrow .line2 { width: 3px; border: none; background: #ddd; }
 .formError .formErrorArrow .line1 { width: 1px; border: none; background: #ddd; }
+
+/*系统错误提示*/
+#error { background: #333; width: 600px; margin: 0 auto; margin-top: 100px; color: #fff; padding: 10px; -moz-border-radius-topleft: 4px; -moz-border-radius-topright: 4px; -moz-border-radius-bottomleft: 4px; -moz-border-radius-bottomright: 4px; -webkit-border-top-left-radius: 4px; -webkit-border-top-right-radius: 4px; -webkit-border-bottom-left-radius: 4px; -webkit-border-bottom-right-radius: 4px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; text-align: left}
+#error h1 { padding: 15px 10px; margin: 0; font-size: 18px; }
+#error p { padding: 0 20px 20px 20px; margin: 0; font-size: 12px; }
+#error .message,#error .redirect{padding: 0 20px 20px 10px; margin: 0; font-size: 16px;color:#FFFF00;}
+#error img { padding: 0 0 5px 260px; }
+#error .redirect a{text-decoration:none;font-size: 12px;color:#FFFF00;}
+#error .redirect a:hover{text-decoration:underline;color:#FFF;}

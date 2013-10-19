@@ -26,6 +26,10 @@ a:hover.move { background-position: 100% -44px; }
 .floatL { float: left; }
 .floatR { float: right; }
 .title, .title a { color: #3184db; }
+#errorHtml {display: none; padding: 5px; background: #FFFF80; border: 1px solid #C4C43C; font-size: 14px;}
+.errorSummary  p {  font-weight: bold; }
+.errorSummary li { padding: 5px 0; }
+.errorSummary ul li{clear: both;}
 /*轮播图*/
 .banner { width: 100%; position: relative; height: 410px; background: #000;}
 .banner .bd { margin: 0 auto; position: relative; z-index: 0; overflow: hidden; }
@@ -238,7 +242,9 @@ ul.yiiPager .first, ul.yiiPager .last { }
 .boxTit, .fl .boxTit { background: #FFF url("../images/bm_h.png") repeat-x 0 0; border: none; border: 1px solid #F3F3F3; border-radius: 5px 5px 0 0; }
 .bm, .bn { margin-bottom: 10px; }
 .bmc { padding: 10px; border: 1px solid #F3F3F3; border-top: none; background: #FFF; }
-.bmc li { float: left; margin: 2px 0; padding: 0; width: 50%; height: 1.5em; overflow: hidden; }
+.bmc .list li { float: left; margin: 2px 0; padding: 0; width: 50%; height: 1.5em; overflow: hidden; }
+
+
 .boxTit h3 { font-weight: 700; background: url("../images/sdoth.png") no-repeat 0 50%; padding-left: 15px; }
 #comment .cForm { width: 98%; border: 1px solid; border-color: #999 #CCC #CCC #999; margin-top: 20px }
 #comment .cForm .bar { padding: 0 10px 0 0; height: 25px; line-height: 25px; border-bottom: 1px solid #F3F3F3; background: #F2F2F2; }
@@ -281,3 +287,12 @@ ul.yiiPager .first, ul.yiiPager .last { }
 .question .qlist dt span{font-weight: bold; margin: 0 20px; color: #00F}
 .question .qlist dd{padding: 5px 0 5px 10px; }
 .question .qlist dd.reply{border-top: 1px solid #F2F2F2; color: #F00; padding: 0 0 0 10px}
+
+/*错误提示*/
+#error { background: #333; width: 600px; margin: 0 auto; margin-top: 100px; color: #fff; padding: 10px; -moz-border-radius-topleft: 4px; -moz-border-radius-topright: 4px; -moz-border-radius-bottomleft: 4px; -moz-border-radius-bottomright: 4px; -webkit-border-top-left-radius: 4px; -webkit-border-top-right-radius: 4px; -webkit-border-bottom-left-radius: 4px; -webkit-border-bottom-right-radius: 4px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; text-align: left}
+#error h1 { padding: 15px 10px; margin: 0; font-size: 18px; }
+#error p { padding: 0 20px 20px 20px; margin: 0; font-size: 12px; }
+#error .message,#error .redirect{padding: 0 20px 20px 10px; margin: 0; font-size: 16px;color:#FFFF00;}
+#error img { padding: 0 0 5px 260px; }
+#error .redirect a{text-decoration:none;font-size: 12px;color:#7D7D7D;}
+#error .redirect a:hover{text-decoration:underline;color:#FFF;}

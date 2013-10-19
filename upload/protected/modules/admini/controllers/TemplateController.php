@@ -30,7 +30,7 @@ class TemplateController extends XAdminiBase
      *
      */
     public function actionFolderCreate() {
-        parent::_acl('template_folder_create',array('ajax'=>true));
+        parent::_acl('template_folder_create',array('response'=>'json'));
         if ( isset( $_POST ) ) {
             try {
                 $folderName = trim( $this->_gets->getParam( 'folder' ) );
@@ -55,6 +55,8 @@ class TemplateController extends XAdminiBase
      */
     public function actionCreateTpl() {
         parent::_acl('template_create');
+         parent::_configParams(array('action'=>'allowTplOperate', 'val'=>'Y', 'message'=>'当前配置文件不允许创建或编辑模板，请在 protected/config/params.php 中配置 allowTplOperate 为 Y'));
+        
         $folderName = trim( $this->_gets->getParam( 'folderName' ) );
         if (  $_POST ) {
             try {
@@ -88,8 +90,9 @@ class TemplateController extends XAdminiBase
      *
      * @param $id
      */
-    public function actionUpdate( $filename ) {
+    public function actionUpdateTpl( $filename ) {
         parent::_acl();
+        parent::_configParams(array('action'=>'allowTplOperate', 'val'=>'Y', 'message'=>'不允许创建或编辑模板，请在 protected/config/params.php 中配置 allowTplOperate 为 Y'));
         $filename = trim( $this->_gets->getParam( 'filename' ) );
         $content = trim( $this->_gets->getParam( 'content' ) );
         if ( isset( $_POST['content'] ) ) {

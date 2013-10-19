@@ -21,6 +21,7 @@ class Controller extends CController
     protected $_theme;
     protected $_themePath;
     protected $_bagecms = 'BageCMS3.1.0';
+    protected $_bagecmsRelease = '20131020';
 
     /**
 	 * 初始化
@@ -35,7 +36,6 @@ class Controller extends CController
         $this->_baseUrl = Yii::app()->baseUrl;
         $this->_theme = Yii::app()->theme;
         $this->_themePath = str_replace(array('\\', '\\\\'), '/', Yii::app()->theme->basePath);
-        
     }
 
     /*
@@ -61,7 +61,6 @@ class Controller extends CController
         $domain && $cookieSet->domain = $domain;
         $secure && $cookieSet->secure = $secure;
         Yii::app()->request->cookies[$name] = $cookieSet;
-    
     }
 
     /**
@@ -94,7 +93,6 @@ class Controller extends CController
     protected function _sessionSet ($name, $value = '', $expire = 0, $path = '')
     {
         $this->_xsession[$name] = $value;
-    
     }
 
     /**
@@ -115,13 +113,13 @@ class Controller extends CController
     {
         $this->_xsession->remove($name);
     }
-	
-	/**
-	* 版本信息
-	*/
-	public function actionVersion(){
-		exit($this->_bagecms);
-	}
+
+    /**
+    * 版本信息
+    */
+    public function actionVersion(){
+        exit($this->_bagecms .' '. $this->_bagecmsRelease);
+    }
 
     /**
      * 载入项目
@@ -131,17 +129,14 @@ class Controller extends CController
         if ($type == 'attr') {
             $data = $model->findByAttributes($condition);
         } else 
-            if ($type == 'string') {
+            if ($type == 'string') 
                 $data = $model->find($condition, $params);
-            } else {
+            else 
                 $data = $model->findByPk($condition);
-            }
-        if ($data) {
+        if ($data) 
             return $data;
-        } else {
+         else 
             throw new CHttpException(404, '记录不存在');
-        }
-    
     }
 
     /**
@@ -149,7 +144,16 @@ class Controller extends CController
 	 */
     public function actions ()
     {
-        return array ('captcha' => array ('class' => 'CCaptchaAction' , 'minLength' => 1 , 'maxLength' => 5 , 'backColor' => 0xFFFFFF , 'width' => 100 , 'height' => 40 ) );
+        return array (
+            'captcha' => array (
+                'class' => 'CCaptchaAction' ,
+                'minLength' => 1 ,
+                'maxLength' => 5 ,
+                'backColor' => 0xFFFFFF ,
+                'width' => 100 ,
+                'height' => 40 
+            )
+         );
     }
 
     /**
@@ -161,7 +165,7 @@ class Controller extends CController
         if(Config::get('admin_logger') == 'open'){
             $model = new AdminLogger();
             $model->attributes = $arr;
-            ! isset($arr['user_id']) && $model->user_id = intval(self::_sessionGet('_adminiUserId'));
+            !isset($arr['user_id']) && $model->user_id = intval(self::_sessionGet('_adminiUserId'));
             $model->url = Yii::app()->request->getRequestUri();
             $model->ip = XUtils::getClientIP();
             $model->save();
@@ -176,7 +180,7 @@ class Controller extends CController
     {
         $model = new UserLogger();
         $model->attributes = $arr;
-        ! isset($arr['user_id']) && $model->user_id = intval(self::_sessionGet('_userId'));
+        !isset($arr['user_id']) && $model->user_id = intval(self::_sessionGet('_userId'));
         $model->url = Yii::app()->request->getRequestUri();
         $model->ip = XUtils::getClientIP();
         $model->save();
@@ -217,5 +221,4 @@ class Controller extends CController
             }
         }
     }
-
 }

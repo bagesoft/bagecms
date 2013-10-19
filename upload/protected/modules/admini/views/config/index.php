@@ -43,7 +43,7 @@
         </select></td>
     </tr>
     <tr >
-      <td ><textarea name="Config[site_status_intro]" class="tarea" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)"><?php echo $config['site_status_intro']?></textarea></td>
+      <td ><textarea name="Config[site_status_intro]" class="tarea" ><?php echo $config['site_status_intro']?></textarea></td>
     </tr>
     <tr>
       <td class="tb_title">管理员邮箱：</td>

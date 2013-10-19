@@ -10,7 +10,6 @@
  * @version       v3.1.0
  */
 
-
 class DefaultController extends XAdminiBase
 {
     /**
@@ -28,6 +27,7 @@ class DefaultController extends XAdminiBase
     {
         $data['soft'] = 'bagecms';
         $data['softVersion'] = $this->_bagecms;
+        $data['softRelease'] = $this->_bagecmsRelease;
         $data['serverSoft'] = $_SERVER['SERVER_SOFTWARE'];
         $data['serverOs'] = PHP_OS;
         $data['phpVersion'] = PHP_VERSION;
@@ -38,22 +38,18 @@ class DefaultController extends XAdminiBase
         $data['magic_quote_gpc'] = MAGIC_QUOTE_GPC ? '开启' : '关闭';
         $data['allow_url_fopen'] = ini_get('allow_url_fopen') ? '开启' : '关闭';
         $data['excuteUseMemory'] = function_exists('memory_get_usage') ? XUtils::byteFormat(memory_get_usage()) : '未知';
-
         $dbsize = 0;
         $connection = Yii::app()->db;
         $sql = 'SHOW TABLE STATUS LIKE \'' . $connection->tablePrefix . '%\'';
-        
         $command = $connection->createCommand($sql)->queryAll();
-        foreach ($command as $table) {
+        foreach ($command as $table) 
             $dbsize += $table['Data_length'] + $table['Index_length'];
-        }
         $mysqlVersion = $connection->createCommand("SELECT version() AS version")->queryAll();
         $data['mysqlVersion'] = $mysqlVersion[0]['version'];
         $data['dbsize'] = $dbsize ? XUtils::byteFormat($dbsize) : '未知';
         $notebook = Admin::model()->findByPk($this->_adminiUserId);
         $env = XUtils::b64encode(serialize($data));
         $this->render('home', array ('notebook' => $notebook ,'env'=>$env, 'server' => $data ));
-    
     }
 
     /**
@@ -61,13 +57,22 @@ class DefaultController extends XAdminiBase
      */
     public function actionNotebookUpdate ()
     {
-        $notebook = $this->_gets->getPost('notebook');
-        $model = Admin::model()->findByPk($this->_adminiUserId);
-        $model->notebook = trim($notebook);
-        if ($model->save()) {
-            exit('更新完成');
-        } else {
-            exit('更新失败');
+        try {
+            $notebook = $this->_gets->getPost('notebook');
+            $adminModel = Admin::model()->findByPk($this->_adminiUserId);
+            if($adminModel == false)
+                throw new Exception('管理员不存在');
+            $adminModel->notebook = trim($notebook);
+            if ($adminModel->save()) {
+                $var['state'] = 'success';
+                $var['message'] = '更新成功';
+            }else {
+                throw new Exception('更新失败');
+            }
+        } catch (Exception $e) {
+            $var['state'] = 'error';
+            $var['message'] = $e->getMessage();
         }
+        exit(CJSON::encode($var));
     }
 }

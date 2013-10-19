@@ -30,7 +30,6 @@ class AjaxController extends XAdminiBase{
 			$var['message'] = '没有属性';
 		}
 		exit( CJSON::encode( $var ) );
-
 	}
 
 	/**
@@ -39,25 +38,15 @@ class AjaxController extends XAdminiBase{
 	public function actionMailTest() {
 
 		$data = $this->_gets->getParam( 'Config' );
-
 		try {
-
 			$var['state'] = 'success';
 			$var['message'] = '发送成功';
-
-
 			XMail::send();
-
 			var_dump($data);
-
 		} catch ( Exception $e ) {
 			$var['state'] = 'error';
 			$var['message'] = '错误：'. $e->getMessage();
 		}
-
 		exit( CJSON::encode( $var ) );
 	}
-
-
-
 }

@@ -37,13 +37,11 @@ class SpecialController extends XFrontBase
    * 查看专题
    */
   public function actionShow($name){
-    $specialModel = Special::model()->find('title_alias=:titleAlias', array('titleAlias'=>$name));
+    $specialModel = Special::model()->find('title_alias=:titleAlias', array('titleAlias'=>CHtml::encode(strip_tags($name))));
     if ( false == $specialModel )
       throw new CHttpException( 404, '专题不存在' );
-
     //更新浏览次数
     $specialModel->updateCounters(array ('view_count' => 1 ), 'id=:id', array ('id' => $specialModel->id ));
-    
     $specialPostModel = new Post();
     $criteria = new CDbCriteria();
     $criteria->addCondition ( 't.status_is=:status AND special_id=:specialId');
@@ -66,7 +64,6 @@ class SpecialController extends XFrontBase
         'specialPostList'=>$specialPostList,
         'bagecmsPagebar'=>$postPage,
      );
-
     $this->render($tpl, $data);
   }
 }

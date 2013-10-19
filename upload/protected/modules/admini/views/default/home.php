@@ -17,7 +17,7 @@
   </thead>
   <tr>
     <td width="100" >程序版本</td>
-    <td ><?php echo $this->_bagecms?></td>
+    <td ><?php echo $this->_bagecms?> <?php echo $this->_bagecmsRelease?></td>
   </tr>
   <tr>
     <td >最新版本</td>
@@ -56,21 +56,17 @@
 <!-- 
 function updateNotebook()
 {
-   $.ajax({   
-		  type:"POST",   
-			  url:"<?php echo $this->createUrl('notebookUpdate')?>",
-			  data:{
-				  notebook: $('#notebook').val()
-				  },   
-			  beforeSend:function(){
-				  $("#notebookMessage").fadeIn(2000);
-				  	$("#notebookMessage").html('<span style="color:#FF0000"><img src="<?php echo $this->_baseUrl?>/static/admin/images/loading.gif" align="absmiddle">正在更新数据...</span>'); 
-				  },                
-			  success:function(data){
-				$("#notebookMessage").html('<span style="color:#FF0000">'+data+'</span>');	
-				$("#notebookMessage").fadeOut(2000);	
-			}               
-      });   
+  $("#notebookMessage").fadeIn(2000);
+  $("#notebookMessage").html('<span style="color:#FF0000"><img src="<?php echo $this->_baseUrl?>/static/admin/images/loading.gif" align="absmiddle">正在更新数据...</span>'); 
+  $.post("<?php echo $this->createUrl('notebookUpdate')?>",{notebook:$('#notebook').val()},function(response){
+      if(response.state == 'success'){
+          $("#notebookMessage").html('<span style="color:#FF0000">'+response.message+'</span>'); 
+      }else{
+          alert(response.message);
+      }
+      $("#notebookMessage").fadeOut(2000);  
+  }, 'json');
+
 }
 //--> 
 </script>

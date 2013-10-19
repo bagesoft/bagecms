@@ -16,18 +16,12 @@ return array(
     'language'=>'zh_cn',
     'theme'=>'default',
     'timeZone'=>'Asia/Shanghai',
-    'preload'=>array('log'),
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
 		'application.extensions.*',
 	),
     'modules'=>array(
-		'gii'=>array(
-			'class'=>'system.gii.GiiModule',
-			'password'=>'root',
-			'ipFilters'=>array('127.0.0.1','::1'),
-		),
 		'admini'=>array(
 		     'class'=>'application.modules.admini.AdminiModule',
 		),
@@ -40,7 +34,7 @@ return array(
            'class'=>'CFileCache',
         ),
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=~dbName~',
+			'connectionString' => 'mysql:host=~dbHost~;dbname=~dbName~',
 			'emulatePrepare' => true,
 			'enableParamLogging' => true,
 			'enableProfiling'=>true,
@@ -54,8 +48,8 @@ return array(
         ), 
         'urlManager'=>array(
         	//'urlFormat'=>'path',
-        	'showScriptName'=>true,
         	//'urlSuffix'=>'.html',
+        	'showScriptName'=>true,
         	'rules'=>array(
         		'post/<id:\d+>/*'=>'post/show',
         		'post/<id:\d+>_<title:\w+>/*'=>'post/show',
@@ -66,4 +60,5 @@ return array(
         	),
         ),
 	),
+	'params'=> require(dirname(__FILE__).DS.'params.php'),
 );

@@ -46,7 +46,7 @@ $(function(){
     <?php foreach ((array)$row['subFileList'] as $subrow):?>
     <tr class="tb_list">
       <td style="padding:0 0 0 20px"><?php echo $subrow?></td>
-      <td ><a href="<?php echo  $this->createUrl('update',array('filename'=>XUtils::b64encode($row['fileName'].'/'.$subrow)))?>"><img src="<?php echo $this->_baseUrl?>/static/admin/images/update.png" align="absmiddle" /></a>&nbsp;&nbsp;<a href="<?php echo  $this->createUrl('batch',array('command'=>'deleteFile', 'fileName'=>XUtils::b64encode($row['fileName'].'/'.$subrow)))?>" class="confirmSubmit"><img src="<?php echo $this->_baseUrl?>/static/admin/images/delete.png" align="absmiddle" /></a></td>
+      <td ><a href="<?php echo  $this->createUrl('updateTpl',array('filename'=>XUtils::b64encode($row['fileName'].'/'.$subrow)))?>"><img src="<?php echo $this->_baseUrl?>/static/admin/images/update.png" align="absmiddle" /></a>&nbsp;&nbsp;<a href="<?php echo  $this->createUrl('batch',array('command'=>'deleteFile', 'fileName'=>XUtils::b64encode($row['fileName'].'/'.$subrow)))?>" class="confirmSubmit"><img src="<?php echo $this->_baseUrl?>/static/admin/images/delete.png" align="absmiddle" /></a></td>
     </tr>
     <?php endforeach;?>
     <?php endforeach;?>

@@ -37,7 +37,8 @@ class TagController extends XFrontBase
    */
   public function actionPost($name){
      
-    $tagName = urldecode($name);
+    $tagName = CHtml::encode(strip_tags(urldecode($name)));
+
     $tagModel = new Post2tags();
     $post2TagsCriteria = new CDbCriteria();
     if ($tagName) {

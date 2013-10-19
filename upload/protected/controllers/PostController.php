@@ -54,7 +54,7 @@ class PostController extends XFrontBase
     }
     if ( $params['keyword'] ) {
       $condition .= ' AND t.title=:title';
-      $criteriaParams[':title'] = $params['keyword'];
+      $criteriaParams[':title'] = CHtml::encode(strip_tags($params['keyword']));
     }
     $postCriteria->condition = $condition;
     $postCriteria->params = $criteriaParams;
@@ -147,15 +147,21 @@ class PostController extends XFrontBase
       elseif ( empty( $nickname ) || empty( $email ) ||  empty( $comment ) )
         throw new Exception( '昵称、邮箱、内容必须填写' );
       $bagecmsPostCommentModel = new PostComment();
-      $bagecmsPostCommentModel ->post_id  = $postId;
-      $bagecmsPostCommentModel ->nickname  = $nickname;
-      $bagecmsPostCommentModel ->content  = $comment;
+
+      $bagecmsPostCommentModel ->attributes = array(
+          'post_id'=> $postId,
+          'nickname'=> $nickname,
+          'email'=> $email,
+          'content'=> $comment,
+      );
+
       if ( $bagecmsPostCommentModel->save() ) {
         $var['state'] = 'success';
         $var['message'] = '提交成功';
       }else {
         throw new Exception( CHtml::errorSummary( $bagecmsPostCommentModel, null, null, array ( 'firstError' => '' ) ) );
       }
+      
     } catch ( Exception $e ) {
       $var['state'] = 'error';
       $var['message'] = '出现错误：'.$e->getMessage();

@@ -216,7 +216,7 @@ html,body,div,p,a,h3{margin:0;padding:0;}
         if ( $getArray ) {
             foreach ( $getArray as $key => $value ) {
                 if ( in_array( $key, $keys ) && $value ) {
-                    $arr[$key] = $value;
+                    $arr[$key] = CHtml::encode(strip_tags($value));
                 }
             }
             return $arr;
@@ -648,6 +648,49 @@ html,body,div,p,a,h3{margin:0;padding:0;}
         }
         return array( 'data'=>$var, 'dataSerialize'=>empty( $var )? '': serialize( $var ) );
 
+    }
+
+    /**
+     * 反引用一个引用字符串
+     * @param  $string
+     * @return string
+     */
+    static function stripslashes($string) {
+        if(is_array($string)) {
+            foreach($string as $key => $val) {
+                $string[$key] = self::stripslashes($val);
+            }
+        } else {
+            $string = stripslashes($string);
+        }
+        return $string;
+    }
+    
+    /**
+     * 引用字符串
+     * @param  $string
+     * @param  $force
+     * @return string
+     */
+   static function addslashes($string, $force = 1) {
+        if(is_array($string)) {
+            foreach($string as $key => $val) {
+                $string[$key] = self::addslashes($val, $force);
+            }
+        } else {
+            $string = addslashes($string);
+        }
+        return $string;
+    }
+
+    /**
+     * 格式化内容
+     */
+    static function formatHtml($content, $options = ''){
+        $purifier = new CHtmlPurifier();
+        if($options != false)
+            $purifier->options = $options;
+        return $purifier->purify($content);
     }
 }
 

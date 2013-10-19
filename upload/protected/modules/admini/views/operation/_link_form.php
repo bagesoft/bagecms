@@ -1,5 +1,4 @@
 <?php if (CHtml::errorSummary($model)):?>
-
 <table id="tips">
   <tr>
     <td><div class="erro_div"><span class="error_message"> <?php echo CHtml::errorSummary($model); ?> </span></div></td>

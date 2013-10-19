@@ -35,6 +35,7 @@ class ConfigController extends XAdminiBase
     {
         if (XUtils::method() == 'POST') {
             foreach ((array) $data as $key => $row) {
+                $row = XUtils::addslashes($row);
                 $connection = Yii::app()->db->createCommand("REPLACE INTO {{config}}(`scope`, `variable`, `value`) VALUES('$scope','$key', '$row') ")->execute();
             }
             XXcache::refresh('_config', 3600);
