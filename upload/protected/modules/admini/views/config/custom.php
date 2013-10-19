@@ -2,11 +2,6 @@
 
 <div id="contentHeader">
   <h3>自定义属性</h3>
-  <div class="searchArea">
-    <ul class="action left" >
-    </ul>
-    <div class="search right"> </div>
-  </div>
 </div>
 <?php if($attrModel):?>
 <form action="" method="post"  enctype="multipart/form-data" >

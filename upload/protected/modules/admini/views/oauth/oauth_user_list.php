@@ -2,11 +2,7 @@
 
 <div id="contentHeader">
   <h3>第三方登录</h3>
-  <div class="searchArea">
-    <ul class="action left" >
-    </ul>
-    <div class="search right"> </div>
-  </div>
+  
 </div>
 <table class="content_list">
   <form method="post" action="" name="cpform" >

@@ -2,11 +2,7 @@
 
 <div id="contentHeader">
   <h3>缓存管理</h3>
-  <div class="searchArea">
-    <ul class="action left" >
-    </ul>
-    <div class="search right"> </div>
-  </div>
+  
 </div>
 <form action="" method="post" enctype="multipart/form-data" id="cacheForm" name="cacheForm">
   <table class="content_list">

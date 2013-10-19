@@ -2,11 +2,7 @@
 
 <div id="contentHeader">
   <h3>模板管理</h3>
-  <div class="searchArea">
-    <ul class="action left" >
-    </ul>
-    <div class="search right"> </div>
-  </div>
+  
 </div>
 <script type="text/javascript">
 $(function(){

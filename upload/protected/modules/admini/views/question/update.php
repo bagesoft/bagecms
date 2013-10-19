@@ -2,11 +2,7 @@
 
 <div id="contentHeader">
   <h3>留言反馈</h3>
-  <div class="searchArea">
-    <ul class="action left" >
-    </ul>
-    <div class="search right"> </div>
-  </div>
+  
 </div>
 <?php if (CHtml::errorSummary($model)):?>
 <table id="tips">

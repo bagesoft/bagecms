@@ -2,11 +2,7 @@
 
 <div id="contentHeader">
   <h3>上传设置</h3>
-  <div class="searchArea">
-    <ul class="action left" >
-    </ul>
-    <div class="search right"> </div>
-  </div>
+  
 </div>
 <form action="" method="post"  enctype="multipart/form-data" name="xform" id="xform">
   <table class="content_list">
