@@ -287,6 +287,8 @@ class XAdminiBase extends Controller
                     exit(CJSON::encode($var)); 
                 }else{
                     $referrer = Yii::app()->request->urlReferrer? Yii::app()->request->urlReferrer : $this->createUrl('default/home') ;
+                    if(preg_match("/default\/index/i", $referrer))
+                        $referrer =  $this->createUrl('default/home') ;
                     $tplVar = array(
                         'code'=>'访问受限',
                         'message'=>$e->getMessage(),

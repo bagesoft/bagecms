@@ -1,14 +1,5 @@
 
 --
--- Dumping data for table `#@__attr`
---
-
-INSERT INTO `#@__attr` (`id`, `scope`, `attr_name`, `attr_name_alias`, `catalog_id`, `tips`, `sort_order`, `attr_type`, `data_default`, `max_lenght`, `create_time`) VALUES
-(1, 'config', '手机', 'mobile', 0, '', 0, 'input', '', 0, 1379553842),
-(2, 'config', '传真', 'fax', 0, '', 0, 'input', '', 0, 1379553920);
-
-
---
 -- Dumping data for table `#@__post`
 --
 

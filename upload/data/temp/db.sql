@@ -122,7 +122,16 @@ CREATE TABLE IF NOT EXISTS `#@__attr` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='扩展字段管理' ;
 
+--
+-- Dumping data for table `#@__attr`
+--
 
+
+INSERT INTO `#@__attr` (`scope`, `attr_name`, `attr_name_alias`, `catalog_id`, `tips`, `sort_order`, `attr_type`, `data_default`, `max_lenght`, `create_time`) VALUES
+('config', '手机', 'mobile', 0, '', 0, 'input', '', 0, 1379553842),
+('config', '传真', 'fax', 0, '', 0, 'input', '', 0, 1379553920),
+('config', '电话', 'telephone', 0, '', 0, 'input', '', 0, 1379553920),
+('config', '地址', 'address', 0, '', 0, 'input', '', 0, 1379553920);
 
 -- --------------------------------------------------------
 

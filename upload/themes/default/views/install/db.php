@@ -12,8 +12,8 @@
     <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
       <tr>
         <th width="25%" height="30" align="right">数据库服务器：</th>
-        <td><input value="localhost" type="text" name="dbHost" id="dbHost" class="class_input validate[required]" />
-          <span class="cnote">数据库服务器地址, 一般为 localhost</span></td>
+        <td><input value="127.0.0.1" type="text" name="dbHost" id="dbHost" class="class_input validate[required]" />
+          <span class="cnote">数据库服务器地址, 一般为 本地:127.0.0.1</span></td>
       </tr>
       <tr>
         <th height="30" align="right">数据库名称：</th>

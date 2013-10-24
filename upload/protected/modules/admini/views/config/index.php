@@ -69,7 +69,7 @@
         请填写第三方统计的 js 代码</td>
     </tr>
     <tr class="submit">
-      <td ><input type="submit" name="editsubmit" value="提交" class="button" tabindex="3" /></td>
+      <td ><input type="submit" name="editsubmit" value="提交" class="button" tabindex="3" />&nbsp;&nbsp;<a href="<?php echo $this->createUrl('custom')?>" class="actionLink"><span>自定义配置</span></a></td>
     </tr>
   </table>
 </form>

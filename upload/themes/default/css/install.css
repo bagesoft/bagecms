@@ -55,6 +55,8 @@ td.failed { background-color: #FF8080; border: 1px solid silver; padding: 2px; c
 .complete .help a{text-decoration: none;color:#6ca1b4}
 .complete .red{color: #F00}
 .red{color: #F00}
+.action{display:inline-block; padding:3px 10px; background:#00A3CF; color:#FFF}
+a.action:hover{color:#FFF}
 /*页脚区域*/
 .footer { padding: 30px 0 30px 0; color: #ccc; text-align: center; font-family: Verdana; }
 /* jquery 验证  */
